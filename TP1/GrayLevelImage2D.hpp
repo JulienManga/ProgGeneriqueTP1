@@ -5,6 +5,10 @@
 #include <vector>
 #include <exception>
 
+#include <string> // chaînes de caractères
+#include <fstream> // flux sur les fichiers
+#include <sstream> // flux sur les chaînes de caractères
+
 
 class GrayLevelImage2D
 {
@@ -63,10 +67,10 @@ public:
     std::pair<int,int> position( Iterator it ) const;
 
     bool importPGM( std::istream & input );
-    bool exportPGM( std::ostream & output, bool ascii = true );
+    bool exportPGM( std::ostream & output, bool ascii);
 //  int index( int x, int y ) const;
 
-
+    void resize(int w,int h);
     
 
 
