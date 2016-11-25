@@ -2,9 +2,10 @@
 #include <fstream>
 #include "Image2D.hpp"
 #include "Color.hpp"
+#include "Image2DWriter.hpp"
 using namespace std;
 
-int main( int argc, char** argv )
+int main( int argc, char** argv ){
 /*{
   typedef Image2D<Color> ColorImage2D;
   ColorImage2D img( 8, 8, Color( 255, 0, 255 ) ); // imagette 8x8 remplie de magenta
@@ -25,7 +26,7 @@ int main( int argc, char** argv )
 #include "Image2D.hpp"
 #include "Color.hpp"
 int main()*/
-{
+/*{
   typedef Image2D<Color> ColorImage2D;
   typedef ColorImage2D::Iterator Iterator;
   ColorImage2D img( 256, 256, Color( 0, 0, 0 ) );
@@ -47,4 +48,14 @@ int main()*/
     }
   output.close();
   return 0;
+}*/
+  typedef Image2D<Color> ColorImage2D;
+ColorImage2D img( 256, 256, Color( 128, 0, 0 ) );
+fstream output( "colors.ppm" );
+bool ok2 = Image2DWriter<Color>::write( img, output, false );
+if ( !ok2 ) {
+    std::cerr << "Error writing output file." << std::endl;
+    return 1;
+}
+output.close();
 }
