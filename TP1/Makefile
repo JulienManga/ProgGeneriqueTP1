@@ -1,5 +1,5 @@
 LD=g++
-CXX=g++ -g -c
+CXX=g++ -g -c 
 
 EXEC_SRC=\
 	filtrageMedian.cpp

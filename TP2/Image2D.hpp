@@ -25,13 +25,15 @@ private:
   
   /// @return l'index du pixel (x,y) dans le tableau \red m_data.
 
- struct Iterator : public Container::iterator
+
+
+public:
+
+   struct Iterator : public Container::iterator
     {
         Iterator( Image2D& Image, int x, int y );
     };
 
-
-public:
 
 Image2D(int w,int h,Value g)
 {
