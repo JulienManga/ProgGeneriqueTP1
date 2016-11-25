@@ -5,7 +5,8 @@ EXEC_SRC=\
 
 MODULE_SRC=\
 		Image2D.hpp\
-		Color.hpp
+		Color.hpp\
+		Image2DWriter.hpp
 
 MODULE_OBJ=${MODULE_SRC:.cpp=.o}
 
