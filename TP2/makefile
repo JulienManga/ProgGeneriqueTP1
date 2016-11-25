@@ -1,11 +1,12 @@
 LD=g++
 CXX=g++ -g -c
 EXEC_SRC=\
-		testGrayLevelImage2D.cpp
+		testColorImage2D.cpp
 
 MODULE_SRC=\
-
+		Color.hpp
 MODULE_OBJ=${MODULE_SRC:.cpp=.o}
+
 EXEC_OBJ=${EXEC_SRC:.cpp=.o}
 EXEC_PRG=${EXEC_SRC:.cpp=}
 
