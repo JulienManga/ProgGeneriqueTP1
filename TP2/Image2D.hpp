@@ -25,6 +25,12 @@ private:
   
   /// @return l'index du pixel (x,y) dans le tableau \red m_data.
 
+ struct Iterator : public Container::iterator
+    {
+        Iterator( Image2D& Image, int x, int y );
+    };
+
+
 public:
 
 Image2D(int w,int h,Value g)
@@ -37,16 +43,16 @@ Image2D(int w,int h,Value g)
     //ctor
 }
 
-Image2D<TValue>::Image2D(){
+Image2D(){
   m_width = 0;
   m_height = 0;
 }
 
 void resize(int w,int h){
-  m_data.resize(0);
-  m_width = 0;
-  m_height = 0;
-  };
+  m_data.resize(w*h);
+  m_width = w;
+  m_height = h;
+  }
 
 
 
@@ -56,7 +62,7 @@ void resize(int w,int h){
 
 
 }*/
-  void Image2D(Value g){
+  Image2D(Value g){
     m_data.assign(w*h,g);
   }
 
