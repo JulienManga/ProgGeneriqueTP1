@@ -24,6 +24,15 @@ struct Color {
   float b() const { return ( (float) blue ) / 255.0; }
   /// Sert à désigner un canal.
   enum Channel { Red, Green, Blue };
+
+  void setR(float _r){
+    red=_r;
+  }
+
+  void setB(float _b){
+    blue=_b;
+  }
+
   /// @return le canal le plus intense.
   Channel argmax() const 
   {
