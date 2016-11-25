@@ -1,5 +1,8 @@
 #ifndef _COLOR_HPP_
 #define _COLOR_HPP_
+#include <algorithm>
+#include <iostream>
+#include <fstream>
 /**
    Représente une couleur avec un codage RGB. Ce codage utilise 3
    octets, le premier octet code l'intensité du rouge, le deuxième
@@ -31,8 +34,7 @@ struct Color {
   float max() const { return std::max( std::max( r(), g() ), b() ); }
   /// @return l'intensité minimale des canaux
   float min() const { return std::min( std::min( r(), g() ), b() ); }
-  /**
-     Convertit la couleur RGB en le modèle HSV (TSV en français).
+     /*Convertit la couleur RGB en le modèle HSV (TSV en français).
      @param h la teinte de la couleur (entre 0 et 359), hue en anglais.
      @param s la saturation de la couleur (entre 0.0 et 1.0)
      @param v la valeur ou brillance de la couleur (entre 0.0 et 1.0).

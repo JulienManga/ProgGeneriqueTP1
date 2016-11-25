@@ -25,10 +25,7 @@ private:
   
   /// @return l'index du pixel (x,y) dans le tableau \red m_data.
 
- struct Iterator : public Container::iterator
-    {
-        Iterator( Image2D& Image, int x, int y );
-    };
+ 
 
 
 public:
@@ -48,6 +45,14 @@ Image2D(){
   m_height = 0;
 }
 
+/// Un itérateur (non-constant) simple sur l'image.
+struct Iterator : public Container::iterator {
+  Iterator( Self & image, int x, int y ) 
+    : Container::iterator( image.m_data.begin() + image.index( x, y ) )
+  {}
+};
+
+
 void resize(int w,int h){
   m_data.resize(w*h);
   m_width = w;
@@ -56,7 +61,7 @@ void resize(int w,int h){
 
 
 
-/*Image2D::~Image2D()
+/*Image2D::~Imagemajke 2D()
 {
     //dtor
 
@@ -110,21 +115,13 @@ int h() const{
         return tmp;
 
     }
-    //! [gli2d-sec3]
-    Image2D::Iterator start(int x, int y){
-      return Iterator(*this,x,y);
-
-      
-    }
-
-    Image2D::Iterator begin(){
-      return start(0,0);
-
-    }
-
-    Image2D::Iterator end(){
-      return start(0,h());
-    }
+    
+    
+Image2D::Iterator begin() { return start( 0, 0 ); }
+/// @return un itérateur pointant après la fin de l'image
+Image2D::Iterator end()   { return start( 0, h() ); }
+/// @return un itérateur pointant sur le pixel (x,y).
+Image2D::Iterator start( int x, int y ) { return Iterator( *this, x, y ); }
 
    bool importPGM( std::istream & input ){
       // Ouvre le flux en entrée sur le fichier "toto.pgm"
