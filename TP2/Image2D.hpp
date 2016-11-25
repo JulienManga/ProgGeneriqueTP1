@@ -14,38 +14,9 @@ public:
   typedef TValue             Value;     // le type pour la valeur des pixels
   typedef std::vector<Value> Container; // le type pour stocker les valeurs des pixels de l'image.
   // Constructeur par défaut
-  Image2D();
-  // Constructeur avec taille w x h. Remplit tout avec la valeur g
-  // (par défaut celle donnée par le constructeur par défaut).
-  Image2D( int w, int h, Value g = Value() );
   
-  // Remplit l'image avec la valeur \a g.
-  void fill( Value g );
+
   
-  /// @return la largeur de l'image.
-  int w() const;
-  /// @return la hauteur de l'image.
-  int h() const;
-  
-  /// Accesseur read-only à la valeur d'un pixel.
-  /// @return la valeur du pixel(i,j)
-  Value at( int i, int j ) const;
-  
-  /// Accesseur read-write à la valeur d'un pixel.
-  /// @return une référence à la valeur du pixel(i,j)
-  Value& at( int i, int j );
-
-    Iterator begin();
-    Iterator end();
-    Iterator start( int x, int y );
-
-    std::pair<int,int> position( Iterator it ) const;
-
-    bool importPGM( std::istream & input );
-    bool exportPGM( std::ostream & output, bool ascii);
-//  int index( int x, int y ) const;
-
-    void resize(int w,int h);
   
 private:
   Container m_data; // mes données; évitera de faire les allocations dynamiques
@@ -53,7 +24,6 @@ private:
   int m_height; // ma hauteur
   
   /// @return l'index du pixel (x,y) dans le tableau \red m_data.
-  int index( int i, int j ) const;
 
 public:
 
@@ -152,7 +122,7 @@ int h() const{
 
    bool importPGM( std::istream & input ){
       // Ouvre le flux en entrée sur le fichier "toto.pgm"
-    if (input.()){
+    if (input.good()){
     std::string s;
     std::string commentary;
     std::getline(input, s);
@@ -204,8 +174,8 @@ int h() const{
     }
   return true;
       }
+};      
 
 
 
-
-
+#endif
