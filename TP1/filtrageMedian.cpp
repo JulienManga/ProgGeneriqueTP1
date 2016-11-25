@@ -20,7 +20,7 @@ int calculerMediane(int h, int w, int porteProcess, GrayLevelImage2D& img){
 				cptVal++;
 			}
 		}
-		std::cerr << "ok1";
+	
 	}
 
 	return sommeTotal/cptVal;
@@ -31,11 +31,11 @@ int calculerMediane(int h, int w, int porteProcess, GrayLevelImage2D& img){
 void filtrageMedian(GrayLevelImage2D& img, int porteProcess){
 	for(int i=0;i<img.h();++i){ // on va traiter chzque pixel
 		for(int j=0;j<img.w();++j){ // on va traiter chzque pixel
-			std:cerr << "ok first";		
+		
 			img.at(i,j)=calculerMediane(i,j,porteProcess,img);
 		}
 	}
-	std::cerr <<"ok2";
+	
 }
 
 
@@ -51,7 +51,7 @@ int main( int argc, char** argv )
   ifstream input( argv[1] ); // récupère le 1er argument.
     std::cerr << ":3" ;
   bool ok = img.importPGM( input );
-  std::cerr << "import ok" ;
+
   if ( !ok )
     {
       std::cerr << "Error reading input file." << std::endl;

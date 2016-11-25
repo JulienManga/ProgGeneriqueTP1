@@ -20,9 +20,9 @@ GrayLevelImage2D::GrayLevelImage2D(){
 }
 
 void GrayLevelImage2D::resize(int w,int h){
-  m_data.resize(0);
-  m_width = 0;
-  m_height = 0;
+  m_data.resize(w*h);
+  m_width = w;
+  m_height = h;
   };
 
 
