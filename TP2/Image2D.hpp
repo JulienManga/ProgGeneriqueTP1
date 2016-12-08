@@ -64,7 +64,7 @@ void resize(int w,int h){
 
 
 
-/*Image2D::~Imagemajke 2D()
+/*Image2D::~Image2D()
 {
     //dtor
 
