@@ -28,10 +28,10 @@ private:
 
 public:
 
-   struct Iterator : public Container::iterator
-    {
-        Iterator( Image2D& Image, int x, int y );
-    };
+   // struct Iterator : public Container::iterator
+   //  {
+   //      Iterator( Image2D& Image, int x, int y );
+   //  };
 
 Image2D(int w,int h,Value g)
 {
@@ -64,7 +64,7 @@ void resize(int w,int h){
 
 
 
-/*Image2D::~Image2D()
+/*Image2D::~Imagemajke 2D()
 {
     //dtor
 

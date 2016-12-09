@@ -52,7 +52,7 @@ int main()*/
   typedef Image2D<Color> ColorImage2D;
 ColorImage2D img( 256, 256, Color( 128, 0, 0 ) );
 fstream output( "colors.ppm" );
-bool ok2 = Image2DWriter<Color>::write( img, output, false );
+bool ok2 = Image2DWriter<Color>::invertRB( img, output, false );
 if ( !ok2 ) {
     std::cerr << "Error writing output file." << std::endl;
     return 1;
