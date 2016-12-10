@@ -1,12 +1,14 @@
 LD=g++ 
 CXX=g++ -g -c 
 EXEC_SRC=\
-		testColorImage2D.cpp
+		testInvert.cpp\
+		
 
 MODULE_SRC=\
 		Image2D.hpp\
 		Color.hpp\
-		Image2DWriter.hpp
+		Image2DWriter.hpp\
+		GrayLevelImage2D.hpp
 
 MODULE_OBJ=${MODULE_SRC:.cpp=.o}
 

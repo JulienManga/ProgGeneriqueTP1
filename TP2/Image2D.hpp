@@ -5,7 +5,7 @@
 #include <string> // chaînes de caractères
 #include <fstream> // flux sur les fichiers
 #include <sstream> // flux sur les chaînes de caractères
-#include "Accessor.hpp"
+//#include "Accessor.hpp"
 using namespace std;
 /// Classe générique pour représenter des images 2D.
 template <typename TValue>
@@ -42,6 +42,17 @@ Image2D(int w,int h,Value g)
     //ctor
 }
 
+
+Image2D(int w,int h)
+{
+
+    m_data.resize(w*h);
+
+    m_width = w;
+    m_height = h;
+    //ctor
+}
+
 Image2D(){
   m_width = 0;
   m_height = 0;
@@ -55,7 +66,7 @@ struct Iterator : public Container::iterator {
 };
 
 
-template <typename TAccessor> 
+/*template <typename TAccessor> 
 struct GenericConstIterator : public Container::const_iterator {
 
 	typedef TAccessor Accessor;
@@ -70,7 +81,7 @@ struct GenericConstIterator : public Container::const_iterator {
   Value operator*() const
     { return Accessor::access( Container::const_iterator::operator*() ); }
 
-
+*/
 
 void resize(int w,int h){
   m_data.resize(w*h);
@@ -142,13 +153,13 @@ Image2D::Iterator end()   { return start( 0, h() ); }
 /// @return un itérateur pointant sur le pixel (x,y).
 Image2D::Iterator start( int x, int y ) { return Iterator( *this, x, y ); }
 
-Image2D::GenericConstIterator< Accessor > begin() { return GenericConstIterator< Accessor > start( 0, 0 ); }
+/*Image2D::GenericConstIterator< Accessor > begin() { return GenericConstIterator< Accessor > start( 0, 0 ); }
 /// @return un itérateur pointant après la fin de l'image
 Image2D::GenericConstIterator< Accessor > end()   { return GenericConstIterator< Accessor > start( 0, h() ); }
 /// @return un itérateur pointant sur le pixel (x,y).
 Image2D::GenericConstIterator< Accessor > start( int x = 0, int y = 0 ) const
 { return GenericConstIterator< Accessor >( *this, x, y ); }
-
+*/
 
    bool importPGM( std::istream & input ){
       // Ouvre le flux en entrée sur le fichier "toto.pgm"

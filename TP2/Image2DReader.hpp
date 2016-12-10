@@ -1,21 +1,37 @@
-#ifndef _IMAGE2DWRITER_HPP_
-#define _IMAGE2DWRITER_HPP_
+#ifndef _IMAGE2DREADER_HPP_
+#define _IMAGE2DREADER_HPP_
 #include <iostream>
 #include <string>
 #include "Color.hpp"
 #include "Image2D.hpp"
 #include <fstream>
+#include "GrayLevelImage2D.hpp"
 using namespace std;
 
+
+
 template <typename TValue>
+class Image2DReader {
+public:
+  typedef TValue Value;
+  typedef Image2D<Value> Image;
+  static bool read( Image & img, std::ostream & output, bool ascii )
+  {
+    
+    std::cerr << "[Image2DReader<TValue>::read] NOT IMPLEMENTED." << std::endl;
+    return false;
+  }
+};
 
 template <>
-class Image2DWriter<unsigned char> {
+
+
+class Image2DReader<unsigned char> {
 public:
   typedef unsigned char Value;
-  typedef Image2D<Value> Image;
+  typedef Image2D<Value> Image;;
 
-  static bool GrayLevelImage2D::importPGM( Image & img , std::istream & input ){
+  static bool read( Image & img , std::istream & input ){
   if (input.good()){
     std::string s;
     std::string commentary;
@@ -23,14 +39,14 @@ public:
     std::getline(input, commentary);
     int w, h, cmax;
     input>>w>>h>>cmax;
-    resize(w,h);
+    img.resize(w,h);
     if (s[1] == '5'){
       char lect;
       input >> std::noskipws;
       for (int i = 0; i < w; i++){
           for (int j = 0; j < h; j++){
               input >> lect;
-              at(i, j) = lect;
+              img.at(i, j) = lect;
           }
       }
     }else{
@@ -38,7 +54,7 @@ public:
       for (int i = 0; i < w; i++){
           for (int j = 0; j < h; j++){
               input >> lect;
-              at(i, j) = lect;
+              img.at(i, j) = lect;
           }
       }
     }
@@ -49,9 +65,10 @@ public:
         }
    
   
-}
+};
 
-class Image2DWriter<Color> {
+template <>
+class Image2DReader<Color> {
 public:
   typedef Color Value;
   typedef Image2D<Value> Image;
@@ -59,7 +76,7 @@ public:
   typedef Image2D<Color> ColorImage2D;
   typedef ColorImage2D::Iterator Iterator;
 
-  static  bool importPPM( Image & img,std::istream & input ){
+  static  bool read( Image & img,std::istream & input ){
       // Ouvre le flux en entrée sur le fichier "toto.pgm"
     if (input.good()){
     std::string s;
@@ -68,7 +85,7 @@ public:
     std::getline(input, commentary);
     int w, h, cmax;
     input>>w>>h>>cmax;
-    resize(w,h);
+    img.resize(w,h);
     if (s[1] == '6'){
       char r,v,b;
       input >> std::noskipws;
@@ -92,12 +109,13 @@ public:
     
     
      return true;
-  }else{
+  }} else{
     return false;
   }
-        }
+        
         
     }
 };
 
 
+#endif
