@@ -5,6 +5,7 @@
 #include <string> // chaînes de caractères
 #include <fstream> // flux sur les fichiers
 #include <sstream> // flux sur les chaînes de caractères
+#include "Accessor.hpp"
 using namespace std;
 /// Classe générique pour représenter des images 2D.
 template <typename TValue>
@@ -14,8 +15,6 @@ public:
   typedef TValue             Value;     // le type pour la valeur des pixels
   typedef std::vector<Value> Container; // le type pour stocker les valeurs des pixels de l'image.
   // Constructeur par défaut
-  
-
   
   
 private:
@@ -54,6 +53,23 @@ struct Iterator : public Container::iterator {
     : Container::iterator( image.m_data.begin() + image.index( x, y ) )
   {}
 };
+
+
+template <typename TAccessor> 
+struct GenericConstIterator : public Container::const_iterator {
+
+	typedef TAccessor Accessor;
+	typedef typename Accessor::Argument  ImageValue; // Color ou unsigned char
+	typedef typename Accessor::Value     Value;      // unsigned char (pour ColorGreenAccessor)
+	typedef typename Accessor::Reference Reference;  // ColorGreenReference (pour ColorGreenAccessor)
+	
+	GenericConstIterator( const Image2D<ImageValue>& image, int x, int y ) :
+	    : Container::const_iterator( image.m_data.begin() + image.index( x, y ) )
+	    {}
+    // Accès en lecture (rvalue)
+  Value operator*() const
+    { return Accessor::access( Container::const_iterator::operator*() ); }
+
 
 
 void resize(int w,int h){
@@ -125,6 +141,14 @@ Image2D::Iterator begin() { return start( 0, 0 ); }
 Image2D::Iterator end()   { return start( 0, h() ); }
 /// @return un itérateur pointant sur le pixel (x,y).
 Image2D::Iterator start( int x, int y ) { return Iterator( *this, x, y ); }
+
+Image2D::GenericConstIterator< Accessor > begin() { return GenericConstIterator< Accessor > start( 0, 0 ); }
+/// @return un itérateur pointant après la fin de l'image
+Image2D::GenericConstIterator< Accessor > end()   { return GenericConstIterator< Accessor > start( 0, h() ); }
+/// @return un itérateur pointant sur le pixel (x,y).
+Image2D::GenericConstIterator< Accessor > start( int x = 0, int y = 0 ) const
+{ return GenericConstIterator< Accessor >( *this, x, y ); }
+
 
    bool importPGM( std::istream & input ){
       // Ouvre le flux en entrée sur le fichier "toto.pgm"
